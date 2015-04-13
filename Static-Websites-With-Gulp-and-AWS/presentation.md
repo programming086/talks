@@ -36,12 +36,36 @@ Static web sites are a natural fit
 
 ---
 
+![](robocat-site.png)
+
+---
+
+
+![](bemyeyes-site.png)
+
+---
+
+
+![](breaking-site.png)
+
+---
+
+
+![](team.png)
+
+---
+
 ![70%](hammer.png)
-![40%](forge.png)
 
 ^
 We used to used two awesome tools
 What is Hammer?
+
+---
+
+![40%](forge.png)
+
+^
 What is Forge?
 
 ---
@@ -50,10 +74,6 @@ What is Forge?
 
 ^
 Introduce the features of hammer and how it works
-
----
-
-# Demo
 
 ---
 
@@ -218,10 +238,9 @@ $ gem install s3_website
 ``s3_website.yml``
 
 ```ruby
-site_name: example.com
 s3_id: <%= ENV['S3_ACCESS_KEY_ID'] %>
 s3_secret: <%= ENV['S3_SECRET_ACCESS_KEY'] %>
-s3_bucket: site_name
+s3_bucket: awesome-bucket-name
 
 site: build
 max_age:
@@ -232,7 +251,7 @@ cloudfront_distribution_config:
     aliases:
         quantity: 1
         items:
-            CNAME: site_name
+            CNAME: awesomewebsite.tld
 ```
 
 ---
@@ -257,6 +276,74 @@ $ gulp && s3_website push
 ![](startover.png)
 
 # Startover
+
+---
+
+# Templates with Handlebars
+
+![right 100%](handlebars.png)
+
+```handlebars
+{{> header}}
+
+<div class="products">
+	{{#each apps}}
+		<div class="product">
+			<h2>{{this.name}}</h2>
+			{{img this.icon_url}}
+		</div>	
+	{{/each}}
+</div>
+
+{{> footer}}
+```
+
+---
+
+# Templates with Handlebars
+
+![right 100%](handlebars.png)
+
+```coffeescript
+opts = {
+	helpers: {
+		img: (path, retina = true, cls = null) ->
+			rp = retinaPath(path)
+			str = "<img src=\"#{config.imgpath}/#{path}\""
+			if retina
+				str += " data-at2x=\"#{config.imgpath}/#{rp}\""
+			if typeof cls == 'string'
+				str += " class=\"#{cls}\""
+			str += ">"
+
+			return str
+	}
+}
+
+gulp.task 'html', ->
+	gulp.src(paths.handlebars)
+		.pipe(handlebars(data, opts))
+		.pipe(gulp.dest(build_path))
+
+```
+
+---
+
+# Sass with Bourbon
+
+```scss
+$themes: "dark" "light";
+$buttons: "download", "website", "adventure"
+@each $theme in $themes {
+	@each $button in $buttons {
+		.button.#{$theme}.#{$button} { 
+			@include retina-image(
+				"button-#{$class}-#{$theme}", 
+				24px 12px);
+		}
+	}
+}
+```
 
 ---
 
