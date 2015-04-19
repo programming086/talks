@@ -27,7 +27,9 @@ Introduce the talk
 
 ---
 
-![](apps.png)
+![inline](apps/app-breaking-icon_2x.png)![inline](apps/app-televised-icon_2x.png)![inline](apps/app-wordbase-icon_2x.png)![inline](apps/app-bemyeyes-icon_2x.png)
+![inline](apps/app-thermo-icon_2x.png)![inline](apps/app-ultraviolet-icon_2x.png)![inline](apps/app-haze-icon_2x.png)![inline](apps/app-airborne-icon_2x.png)
+![inline](apps/app-treasuretrouble-icon_2x.png)![inline](apps/app-puha-icon_2x.png)![inline](apps/app-outside-icon_2x.png)![inline](apps/app-roskilde-icon_2x.png)
 
 ^
 We work on a lot of apps
@@ -103,6 +105,9 @@ Introduce the features of hammer and how it works
 - Compile Sass / Coffeescript
 - Minify Javascript / CSS
 - Compress image files
+- Generate non retina assets
+- Automatically regenerate on save
+- Reload web browser
 
 ![right 100%](gulp.png)
 
